@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.db.mapper.RankListMapperSpec">
+	<resultMap id="BaseResultMap" type="com.boot.db.entity.RankList">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="parent_id" jdbcType="BIGINT"
+			property="parentId" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="title_ext" jdbcType="VARCHAR"
+			property="titleExt" />
+		<result column="sort" jdbcType="TINYINT" property="sort" />
+		<result column="template_h5" jdbcType="TINYINT"
+			property="templateH5" />
+		<result column="version" jdbcType="VARCHAR" property="version" />
+		<result column="data" jdbcType="VARCHAR" property="data" />
+		<result column="html" jdbcType="VARCHAR" property="html" />
+		<result column="update_time" jdbcType="TIMESTAMP"
+			property="updateTime" />
+		<result column="create_time" jdbcType="TIMESTAMP"
+			property="createTime" />
+	</resultMap>
+	<select id="getH5ByParentId" parameterType="java.lang.Long"
+		resultMap="BaseResultMap">
+		select
+		id, parent_id, title, title_ext, sort, template_h5,
+		version, html,
+		update_time,
+		create_time
+		from rank_list
+		where parent_id = #{parentId,jdbcType=BIGINT}
+	</select>
+
+	<select id="getListByParentId" parameterType="java.lang.Long"
+		resultMap="BaseResultMap">
+		select
+		id, parent_id, title, title_ext, sort, template_h5,
+		version, data, html,
+		update_time,
+		create_time
+		from rank_list
+		<if test="parentId != null">
+		where FIND_IN_SET(id, getRankSub(#{parentId,jdbcType=BIGINT}))
+		</if>
+	</select>
+
+</mapper>

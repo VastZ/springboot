@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.boot.db.dao.StatisticsDayMapper" >
+  <resultMap id="BaseResultMap" type="com.boot.db.StatisticsDay" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="new_user_total" property="newUserTotal" jdbcType="BIGINT" />
+    <result column="new_user_android" property="newUserAndroid" jdbcType="BIGINT" />
+    <result column="new_user_ios" property="newUserIos" jdbcType="BIGINT" />
+    <result column="register_user_total" property="registerUserTotal" jdbcType="BIGINT" />
+    <result column="register_user_android" property="registerUserAndroid" jdbcType="BIGINT" />
+    <result column="register_user_ios" property="registerUserIos" jdbcType="BIGINT" />
+    <result column="accumulate_user" property="accumulateUser" jdbcType="BIGINT" />
+    <result column="active_user" property="activeUser" jdbcType="BIGINT" />
+    <result column="week_reserve_user" property="weekReserveUser" jdbcType="BIGINT" />
+    <result column="week_rate" property="weekRate" jdbcType="DECIMAL" />
+    <result column="double_week_reserve_user" property="doubleWeekReserveUser" jdbcType="BIGINT" />
+    <result column="double_week_rate" property="doubleWeekRate" jdbcType="DECIMAL" />
+    <result column="month_reserve_user" property="monthReserveUser" jdbcType="BIGINT" />
+    <result column="month_rate" property="monthRate" jdbcType="DECIMAL" />
+    <result column="create_date" property="createDate" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, new_user_total, new_user_android, new_user_ios, register_user_total, register_user_android, 
+    register_user_ios, accumulate_user, active_user, week_reserve_user, week_rate, double_week_reserve_user, 
+    double_week_rate, month_reserve_user, month_rate, create_date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.boot.db.StatisticsDayExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from statistics_day
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from statistics_day
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from statistics_day
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.boot.db.StatisticsDay" >
+    insert into statistics_day (id, new_user_total, new_user_android, 
+      new_user_ios, register_user_total, register_user_android, 
+      register_user_ios, accumulate_user, active_user, 
+      week_reserve_user, week_rate, double_week_reserve_user, 
+      double_week_rate, month_reserve_user, month_rate, 
+      create_date)
+    values (#{id,jdbcType=BIGINT}, #{newUserTotal,jdbcType=BIGINT}, #{newUserAndroid,jdbcType=BIGINT}, 
+      #{newUserIos,jdbcType=BIGINT}, #{registerUserTotal,jdbcType=BIGINT}, #{registerUserAndroid,jdbcType=BIGINT}, 
+      #{registerUserIos,jdbcType=BIGINT}, #{accumulateUser,jdbcType=BIGINT}, #{activeUser,jdbcType=BIGINT}, 
+      #{weekReserveUser,jdbcType=BIGINT}, #{weekRate,jdbcType=DECIMAL}, #{doubleWeekReserveUser,jdbcType=BIGINT}, 
+      #{doubleWeekRate,jdbcType=DECIMAL}, #{monthReserveUser,jdbcType=BIGINT}, #{monthRate,jdbcType=DECIMAL}, 
+      #{createDate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.boot.db.StatisticsDay" >
+    insert into statistics_day
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="newUserTotal != null" >
+        new_user_total,
+      </if>
+      <if test="newUserAndroid != null" >
+        new_user_android,
+      </if>
+      <if test="newUserIos != null" >
+        new_user_ios,
+      </if>
+      <if test="registerUserTotal != null" >
+        register_user_total,
+      </if>
+      <if test="registerUserAndroid != null" >
+        register_user_android,
+      </if>
+      <if test="registerUserIos != null" >
+        register_user_ios,
+      </if>
+      <if test="accumulateUser != null" >
+        accumulate_user,
+      </if>
+      <if test="activeUser != null" >
+        active_user,
+      </if>
+      <if test="weekReserveUser != null" >
+        week_reserve_user,
+      </if>
+      <if test="weekRate != null" >
+        week_rate,
+      </if>
+      <if test="doubleWeekReserveUser != null" >
+        double_week_reserve_user,
+      </if>
+      <if test="doubleWeekRate != null" >
+        double_week_rate,
+      </if>
+      <if test="monthReserveUser != null" >
+        month_reserve_user,
+      </if>
+      <if test="monthRate != null" >
+        month_rate,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="newUserTotal != null" >
+        #{newUserTotal,jdbcType=BIGINT},
+      </if>
+      <if test="newUserAndroid != null" >
+        #{newUserAndroid,jdbcType=BIGINT},
+      </if>
+      <if test="newUserIos != null" >
+        #{newUserIos,jdbcType=BIGINT},
+      </if>
+      <if test="registerUserTotal != null" >
+        #{registerUserTotal,jdbcType=BIGINT},
+      </if>
+      <if test="registerUserAndroid != null" >
+        #{registerUserAndroid,jdbcType=BIGINT},
+      </if>
+      <if test="registerUserIos != null" >
+        #{registerUserIos,jdbcType=BIGINT},
+      </if>
+      <if test="accumulateUser != null" >
+        #{accumulateUser,jdbcType=BIGINT},
+      </if>
+      <if test="activeUser != null" >
+        #{activeUser,jdbcType=BIGINT},
+      </if>
+      <if test="weekReserveUser != null" >
+        #{weekReserveUser,jdbcType=BIGINT},
+      </if>
+      <if test="weekRate != null" >
+        #{weekRate,jdbcType=DECIMAL},
+      </if>
+      <if test="doubleWeekReserveUser != null" >
+        #{doubleWeekReserveUser,jdbcType=BIGINT},
+      </if>
+      <if test="doubleWeekRate != null" >
+        #{doubleWeekRate,jdbcType=DECIMAL},
+      </if>
+      <if test="monthReserveUser != null" >
+        #{monthReserveUser,jdbcType=BIGINT},
+      </if>
+      <if test="monthRate != null" >
+        #{monthRate,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.boot.db.StatisticsDay" >
+    update statistics_day
+    <set >
+      <if test="newUserTotal != null" >
+        new_user_total = #{newUserTotal,jdbcType=BIGINT},
+      </if>
+      <if test="newUserAndroid != null" >
+        new_user_android = #{newUserAndroid,jdbcType=BIGINT},
+      </if>
+      <if test="newUserIos != null" >
+        new_user_ios = #{newUserIos,jdbcType=BIGINT},
+      </if>
+      <if test="registerUserTotal != null" >
+        register_user_total = #{registerUserTotal,jdbcType=BIGINT},
+      </if>
+      <if test="registerUserAndroid != null" >
+        register_user_android = #{registerUserAndroid,jdbcType=BIGINT},
+      </if>
+      <if test="registerUserIos != null" >
+        register_user_ios = #{registerUserIos,jdbcType=BIGINT},
+      </if>
+      <if test="accumulateUser != null" >
+        accumulate_user = #{accumulateUser,jdbcType=BIGINT},
+      </if>
+      <if test="activeUser != null" >
+        active_user = #{activeUser,jdbcType=BIGINT},
+      </if>
+      <if test="weekReserveUser != null" >
+        week_reserve_user = #{weekReserveUser,jdbcType=BIGINT},
+      </if>
+      <if test="weekRate != null" >
+        week_rate = #{weekRate,jdbcType=DECIMAL},
+      </if>
+      <if test="doubleWeekReserveUser != null" >
+        double_week_reserve_user = #{doubleWeekReserveUser,jdbcType=BIGINT},
+      </if>
+      <if test="doubleWeekRate != null" >
+        double_week_rate = #{doubleWeekRate,jdbcType=DECIMAL},
+      </if>
+      <if test="monthReserveUser != null" >
+        month_reserve_user = #{monthReserveUser,jdbcType=BIGINT},
+      </if>
+      <if test="monthRate != null" >
+        month_rate = #{monthRate,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.boot.db.StatisticsDay" >
+    update statistics_day
+    set new_user_total = #{newUserTotal,jdbcType=BIGINT},
+      new_user_android = #{newUserAndroid,jdbcType=BIGINT},
+      new_user_ios = #{newUserIos,jdbcType=BIGINT},
+      register_user_total = #{registerUserTotal,jdbcType=BIGINT},
+      register_user_android = #{registerUserAndroid,jdbcType=BIGINT},
+      register_user_ios = #{registerUserIos,jdbcType=BIGINT},
+      accumulate_user = #{accumulateUser,jdbcType=BIGINT},
+      active_user = #{activeUser,jdbcType=BIGINT},
+      week_reserve_user = #{weekReserveUser,jdbcType=BIGINT},
+      week_rate = #{weekRate,jdbcType=DECIMAL},
+      double_week_reserve_user = #{doubleWeekReserveUser,jdbcType=BIGINT},
+      double_week_rate = #{doubleWeekRate,jdbcType=DECIMAL},
+      month_reserve_user = #{monthReserveUser,jdbcType=BIGINT},
+      month_rate = #{monthRate,jdbcType=DECIMAL},
+      create_date = #{createDate,jdbcType=DATE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

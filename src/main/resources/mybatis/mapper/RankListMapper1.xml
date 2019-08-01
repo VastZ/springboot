@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.db.dao.RankMapper">
+
+	<resultMap type="com.boot.db.pojo.RankList" id="BaseResultMap">
+		<result property="id" column="id" />
+		<result property="parentId" column="parent_id" />
+		<result property="title" column="title" />
+		<result property="titleExt" column="title_ext" />
+		<result property="sort" column="sort" />
+		<result property="templateH5" column="template_h5" />
+		<result property="version" column="version" />
+		<result property="data" column="data"  />
+		<result property="version" column="version" />
+	</resultMap>
+
+	<resultMap id="BaseResultMap1" type="com.boot.db.pojo.RankList">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="parent_id" jdbcType="BIGINT"
+			property="parentId" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="title_ext" jdbcType="VARCHAR"
+			property="titleExt" />
+		<result column="sort" jdbcType="INTEGER" property="sort" />
+		<result column="template_h5" jdbcType="INTEGER"
+			property="templateH5" />
+		<result column="version" jdbcType="VARCHAR" property="version" />
+		<result column="data" property="data"  />
+		<result column="create_time" jdbcType="DATE"
+			property="createTime" />
+		<result column="update_time" jdbcType="DATE"
+			property="updateTime" />
+	</resultMap>
+
+	<select id="getRankListById" resultMap="BaseResultMap"
+		parameterType="Integer">
+		SELECT
+		id,
+		parent_id AS parentId,
+		title,
+		title_ext AS
+		titleExt,
+		sort,
+		template_h5 AS templateH5,
+		version,
+		data,
+		html,
+		update_time
+		AS updateTime,
+		create_time AS createTime
+		FROM
+		rank_list where id = #{id};
+	</select>
+
+
+</mapper>

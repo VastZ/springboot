@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.boot.qibaidu.mapper.InnerMessageSysMapper" >
+  <resultMap id="BaseResultMap" type="com.boot.qibaidu.entity.InnerMessageSys" >
+    <id column="uuid" property="uuid" jdbcType="VARCHAR" />
+    <result column="send_time" property="sendTime" jdbcType="TIMESTAMP" />
+    <result column="message_type" property="messageType" jdbcType="TINYINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="receive_user_type" property="receiveUserType" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="TINYINT" />
+    <result column="send_user" property="sendUser" jdbcType="VARCHAR" />
+    <result column="ope_time" property="opeTime" jdbcType="TIMESTAMP" />
+    <result column="oper" property="oper" jdbcType="VARCHAR" />
+    <result column="account_type" property="accountType" jdbcType="VARCHAR" />
+    <result column="user_image" property="userImage" jdbcType="VARCHAR" />
+    <result column="welfare_type" property="welfareType" jdbcType="VARCHAR" />
+    <result column="information_type" property="informationType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    uuid, send_time, message_type, title, content,  receive_user_type, del_flag,
+    send_user, ope_time, oper, account_type, user_image, welfare_type, information_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from inner_message_sys
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from inner_message_sys
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.boot.qibaidu.entity.InnerMessageSys" >
+    insert into inner_message_sys (uuid, send_time, message_type, 
+      title, content,
+      receive_user_type, del_flag, send_user, 
+      ope_time, oper, account_type, 
+      user_image, welfare_type, information_type
+      )
+    values (#{uuid,jdbcType=VARCHAR}, #{sendTime,jdbcType=TIMESTAMP}, #{messageType,jdbcType=TINYINT}, 
+      #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR},
+      #{receiveUserType,jdbcType=VARCHAR}, #{delFlag,jdbcType=TINYINT}, #{sendUser,jdbcType=VARCHAR}, 
+      #{opeTime,jdbcType=TIMESTAMP}, #{oper,jdbcType=VARCHAR}, #{accountType,jdbcType=VARCHAR}, 
+      #{userImage,jdbcType=VARCHAR}, #{welfareType,jdbcType=VARCHAR}, #{informationType,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.boot.qibaidu.entity.InnerMessageSys" >
+    insert into inner_message_sys
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        uuid,
+      </if>
+      <if test="sendTime != null" >
+        send_time,
+      </if>
+      <if test="messageType != null" >
+        message_type,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="receiveUserType != null" >
+        receive_user_type,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="sendUser != null" >
+        send_user,
+      </if>
+      <if test="opeTime != null" >
+        ope_time,
+      </if>
+      <if test="oper != null" >
+        oper,
+      </if>
+      <if test="accountType != null" >
+        account_type,
+      </if>
+      <if test="userImage != null" >
+        user_image,
+      </if>
+      <if test="welfareType != null" >
+        welfare_type,
+      </if>
+      <if test="informationType != null" >
+        information_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="sendTime != null" >
+        #{sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="messageType != null" >
+        #{messageType,jdbcType=TINYINT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveUserType != null" >
+        #{receiveUserType,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=TINYINT},
+      </if>
+      <if test="sendUser != null" >
+        #{sendUser,jdbcType=VARCHAR},
+      </if>
+      <if test="opeTime != null" >
+        #{opeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oper != null" >
+        #{oper,jdbcType=VARCHAR},
+      </if>
+      <if test="accountType != null" >
+        #{accountType,jdbcType=VARCHAR},
+      </if>
+      <if test="userImage != null" >
+        #{userImage,jdbcType=VARCHAR},
+      </if>
+      <if test="welfareType != null" >
+        #{welfareType,jdbcType=VARCHAR},
+      </if>
+      <if test="informationType != null" >
+        #{informationType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.boot.qibaidu.entity.InnerMessageSys" >
+    update inner_message_sys
+    <set >
+      <if test="sendTime != null" >
+        send_time = #{sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="messageType != null" >
+        message_type = #{messageType,jdbcType=TINYINT},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveUserType != null" >
+        receive_user_type = #{receiveUserType,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=TINYINT},
+      </if>
+      <if test="sendUser != null" >
+        send_user = #{sendUser,jdbcType=VARCHAR},
+      </if>
+      <if test="opeTime != null" >
+        ope_time = #{opeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oper != null" >
+        oper = #{oper,jdbcType=VARCHAR},
+      </if>
+      <if test="accountType != null" >
+        account_type = #{accountType,jdbcType=VARCHAR},
+      </if>
+      <if test="userImage != null" >
+        user_image = #{userImage,jdbcType=VARCHAR},
+      </if>
+      <if test="welfareType != null" >
+        welfare_type = #{welfareType,jdbcType=VARCHAR},
+      </if>
+      <if test="informationType != null" >
+        information_type = #{informationType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.boot.qibaidu.entity.InnerMessageSys" >
+    update inner_message_sys
+    set send_time = #{sendTime,jdbcType=TIMESTAMP},
+      message_type = #{messageType,jdbcType=TINYINT},
+      title = #{title,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      receive_user_type = #{receiveUserType,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=TINYINT},
+      send_user = #{sendUser,jdbcType=VARCHAR},
+      ope_time = #{opeTime,jdbcType=TIMESTAMP},
+      oper = #{oper,jdbcType=VARCHAR},
+      account_type = #{accountType,jdbcType=VARCHAR},
+      user_image = #{userImage,jdbcType=VARCHAR},
+      welfare_type = #{welfareType,jdbcType=VARCHAR},
+      information_type = #{informationType,jdbcType=VARCHAR}
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </update>
+</mapper>

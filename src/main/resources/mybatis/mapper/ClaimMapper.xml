@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.db.dao.CalimMapper">
+
+  <select id="getClaimList" resultType="com.alibaba.fastjson.JSONObject">
+    select * from claim_main where brandUuid = 'PB0000000643' and status = '09' and kindOfLoss = 'univers'
+    <if test="uuid != null and uuid != ''">
+      and uuid = #{uuid}
+    </if>
+  </select>
+
+  <select id="getKindOfLoss" resultType="java.lang.String">
+      select kindOfLost from claim_type where uuid  = #{uuid}
+  </select>
+
+  <select id="getClaimPersonList" resultType="com.alibaba.fastjson.JSONObject">
+    select * from claim_person where claimmainuuid = #{claimmainuuid} order by PersonType
+  </select>
+
+  <select id="getSaleMan" resultType="com.alibaba.fastjson.JSONObject">
+   select a.realname, a.certType, a.certCode from order_main om, a_customer_info a
+   where om.salesmanId = a.customerUuid and om.uuid = #{orderMainUuid};
+  </select>
+
+  <select id="getHolderInsuranList" resultType="com.alibaba.fastjson.JSONObject">
+  select * from order_policyholder_insured where orderMainUuid = #{orderMainUuid} order by type
+  </select>
+
+  <select id="getUuids" resultType="java.lang.String">
+      select uuid from claim_main where brandUuid = 'PB0000000643' and `status` in  ('05', '08') and claimkey is not null
+  </select>
+
+  <select id="getResponse" resultType="com.alibaba.fastjson.JSONObject">
+      select claim_main_uuid, response_xml from claim_send_record where  status in ('05', '08')
+    <if test="uuids != null">
+      and  claim_main_uuid in
+      <foreach item="item" index="index" collection="uuids" open="(" close=")" separator=",">
+        #{item}
+      </foreach>
+    </if>
+  </select>
+
+  <select id="getOldLostData" resultType="com.boot.db.entity.OldLost">
+      select id, code, request from old_lost_data where status = 0 limit 0,20000
+  </select>
+
+  <update id="updateOldLostData">
+    update old_lost_data set status = #{status} where id = #{id}
+  </update>
+
+</mapper>
