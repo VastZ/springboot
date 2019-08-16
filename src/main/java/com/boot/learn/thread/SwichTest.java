@@ -11,7 +11,7 @@ public class SwichTest {
 
     public static void main(String[] args) {
         method(null);
-
+        
         Instant instant  =  Instant.now();
     }
 

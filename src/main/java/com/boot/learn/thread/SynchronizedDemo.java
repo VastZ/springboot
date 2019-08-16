@@ -6,8 +6,8 @@ public class SynchronizedDemo {
 
         testClass(); // C D 只有当一个执行完 才开始 锁对应 class   this和class不是同一个对象，所以可以分别进入
         testThis(); // A B 同时开始 锁对应实例 如果是同一个实例则会排队按顺序进行
-//        testStatic();// E F 只有当一个执行完 才开始 锁对应 class 与 testClass 共享一个锁
-//        testMethod(); // G H 同时开始 锁对应实例
+        testStatic();// E F 只有当一个执行完 才开始 锁对应 class 与 testClass 共享一个锁
+        testMethod(); // G H 同时开始 锁对应实例
     }
 
 
@@ -89,30 +89,30 @@ public class SynchronizedDemo {
 
         public void syncThis() throws InterruptedException {
             synchronized (this) {
-                System.out.println(Thread.currentThread().getName() + "正在执行");
+                System.out.println(Thread.currentThread().getName() + " syncThis 正在执行");
                 Thread.sleep(2000);
-                System.out.println(Thread.currentThread().getName() + "执行完毕");
+                System.out.println(Thread.currentThread().getName() + " syncThis 执行完毕");
             }
         }
 
         public void syncClass() throws InterruptedException {
             synchronized (MySync.class) {
-                System.out.println(Thread.currentThread().getName() + "正在执行");
+                System.out.println(Thread.currentThread().getName() + " syncClass 正在执行");
                 Thread.sleep(2000);
-                System.out.println(Thread.currentThread().getName() + "执行完毕");
+                System.out.println(Thread.currentThread().getName() + " syncClass 执行完毕");
             }
         }
 
         public synchronized void syncMothed() throws InterruptedException {
-            System.out.println(Thread.currentThread().getName() + "正在执行");
+            System.out.println(Thread.currentThread().getName() + " syncMothed 正在执行");
             Thread.sleep(2000);
-            System.out.println(Thread.currentThread().getName() + "执行完毕");
+            System.out.println(Thread.currentThread().getName() + " syncMothed 执行完毕");
         }
 
         public static synchronized void syncStaticMothed() throws InterruptedException {
-            System.out.println(Thread.currentThread().getName() + "正在执行");
+            System.out.println(Thread.currentThread().getName() + " syncStaticMothed 正在执行");
             Thread.sleep(2000);
-            System.out.println(Thread.currentThread().getName() + "执行完毕");
+            System.out.println(Thread.currentThread().getName() + " syncStaticMothed 执行完毕");
         }
 
     }
