@@ -31,7 +31,7 @@ public class SynchronizedTest {
 
 class ThreadDemo {
     public void syncThis() throws InterruptedException {
-        synchronized (this){
+        synchronized (ThreadDemo.class){
             System.out.println(Thread.currentThread().getName() + " this 开始执行");
             Thread.sleep(3000);
             System.out.println(Thread.currentThread().getName() + " this 执行结束了~~~~");
@@ -39,7 +39,7 @@ class ThreadDemo {
     }
 
     public void syncClass() throws InterruptedException {
-        synchronized (this){
+        synchronized (ThreadDemo.class){
             System.out.println(Thread.currentThread().getName() + " Class 开始执行");
             Thread.sleep(3000);
             System.out.println(Thread.currentThread().getName() + " Class 执行结束了~~~~");

@@ -1,9 +1,6 @@
 package com.boot.mq;
 
-import com.rabbitmq.client.AMQP;
-import com.rabbitmq.client.impl.AMQImpl;
 import org.springframework.amqp.core.*;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

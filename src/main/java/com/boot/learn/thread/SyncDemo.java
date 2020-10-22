@@ -10,7 +10,7 @@ public class SyncDemo {
             try {
                 System.out.println("A线程开始执行");
                 myServiec.methodA();
-//                    MyServiec.methodA();
+                myServiec.methodB();
                 System.out.println("A线程执行完");
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -21,7 +21,7 @@ public class SyncDemo {
             try {
                 System.out.println("B线程开始执行");
                 myServiec2.methodB();
-//                    MyServiec.methodA();
+                myServiec2.methodA();
                 System.out.println("B线程执行完");
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -36,12 +36,12 @@ class MyServiec{
 
     public synchronized  void methodA() throws InterruptedException {
         System.out.println("当前线程" + Thread.currentThread().getName() + " 执行方法A");
-        Thread.sleep(5000);
+        Thread.sleep(2000);
     }
 
     public synchronized  void methodB() throws InterruptedException {
         System.out.println("当前线程" + Thread.currentThread().getName() + " 执行方法B");
-        Thread.sleep(1000);
+        Thread.sleep(3000);
     }
 
 

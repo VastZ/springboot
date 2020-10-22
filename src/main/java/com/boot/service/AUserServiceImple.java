@@ -17,6 +17,7 @@ import java.util.List;
  * @date 2019/4/22 17:02
  */
 @Service
+@Transactional
 public class AUserServiceImple implements AUserService {
 
     @Autowired
@@ -26,7 +27,7 @@ public class AUserServiceImple implements AUserService {
     JsonService jsonService;
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
+//    @Transactional(rollbackFor = Exception.class)
     public void testSave(String json) {
         AUser aUser = new AUser();
         aUser.setAge(28);
@@ -43,7 +44,7 @@ public class AUserServiceImple implements AUserService {
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
+//    @Transactional
     public void testTranscation() {
         AUser aUser = new AUser();
         aUser.setAge(28);
@@ -63,4 +64,29 @@ public class AUserServiceImple implements AUserService {
         aUser.setUpdateTime(new Date());
         aUserMapper.updateByPrimaryKey(aUser);
     }
+
+    @Override
+//    @Transactional(rollbackFor = Exception.class)
+    public void reflectSave(String json) {
+        AUser aUser = new AUser();
+        aUser.setAge(28);
+        aUser.setName("最外层");
+        aUserMapper.insert(aUser);
+        jsonService.save(json);
+        AUserExample example = new AUserExample();
+        List<AUser> list = aUserMapper.selectByExample(example);
+        System.out.println("列表:" + JSON.toJSONString(list));
+        if("0".equals(json)){
+            AUser aUser1 = null;
+            aUser1.getAge();
+        }
+    }
+
+    public static void main(String[] args) {
+        String str = "";
+        AUser a = JSON.parseObject(str, AUser.class);
+        System.out.println( a);
+    }
+
+
 }

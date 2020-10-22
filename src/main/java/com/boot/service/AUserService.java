@@ -10,4 +10,6 @@ public interface AUserService {
     void testSave(String json);
 
     void testTranscation();
+
+     void reflectSave(String json);
 }

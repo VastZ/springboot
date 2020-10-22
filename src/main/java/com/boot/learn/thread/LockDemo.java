@@ -17,9 +17,7 @@ public class LockDemo {
                     lock.unlock();
                 }
             }).start();
-
         }
-        Thread.sleep(5000);
         System.out.println(count[0]);
     }
 

@@ -2,7 +2,7 @@ package com.boot.test;
 
 import java.lang.reflect.Field;
 
-public class IntegerTest {
+public class IntegerTest1 {
     
     // 如何改变一个Integer的值
     public static void main(String[] args) {
